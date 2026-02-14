@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blooming Romantic Flower Garden 🌸🌹</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    overflow:hidden;
+    font-family:'Segoe UI',sans-serif;
+
+    /* Dynamic rainbow-ish gradient */
+    background: linear-gradient(135deg, #ff758c, #ff4d6d, #c9184a, #f5b7b1, #ffc3a0, #ff6f91);
+    background-size: 1200% 1200%;
+    animation: bgMove 30s ease infinite;
+}
+
+/* Background animation */
+@keyframes bgMove {
+    0%{background-position:0% 50%;}
+    20%{background-position:20% 50%;}
+    40%{background-position:40% 50%;}
+    60%{background-position:60% 50%;}
+    80%{background-position:80% 50%;}
+    100%{background-position:100% 50%;}
+}
+
+/* Message on top */
+.message{
+    position:relative;
+    margin-top:20px;
+    text-align:center;
+    color:white;
+    text-shadow:0 0 15px #fff;
+    animation:fadeIn 3s ease forwards;
+    z-index:10;
+}
+.message h1{
+    font-size:32px;
+    animation:glow 2s infinite alternate;
+}
+.message p{
+    font-size:16px;
+    max-width:500px;
+    margin-top:10px;
+    line-height:1.5;
+}
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(-20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+@keyframes glow{
+    from{text-shadow:0 0 10px #fff;}
+    to{text-shadow:0 0 25px #fff,0 0 50px #ff4d6d;}
+}
+
+/* Flower garden at bottom */
+.flowers-container{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    display:flex;
+    justify-content:space-around;
+    align-items:flex-end;
+    pointer-events:none;
+}
+
+/* Flower sizes */
+.flower{
+    position:relative;
+    animation:sway 4s ease-in-out infinite;
+}
+.flower-small{width:50px; height:70px;}
+.flower-medium{width:70px; height:90px;}
+.flower-large{width:90px; height:120px;}
+
+/* Sway animation */
+@keyframes sway{
+    0%{transform:rotate(-3deg);}
+    50%{transform:rotate(3deg);}
+    100%{transform:rotate(-3deg);}
+}
+
+/* Stem */
+.stem{
+    position:absolute;
+    width:4px;
+    height:60%;
+    background:linear-gradient(to bottom,#145a32,#1e8449);
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    border-radius:5px;
+}
+
+/* Leaves */
+.leaf{
+    position:absolute;
+    width:30px;
+    height:15px;
+    background:linear-gradient(to right,#1e8449,#145a32);
+    border-radius:50% 0;
+    bottom:50%;
+}
+.leaf.left{left:50%; transform:translateX(-80%) rotate(-35deg);}
+.leaf.right{left:50%; transform:translateX(10%) rotate(35deg);}
+
+/* Bloomed petals */
+.petal{
+    position:absolute;
+    width:50%;
+    height:50%;
+    border-radius:50%;
+    top:0;
+    left:50%;
+    transform-origin:bottom center;
+}
+
+/* Falling petals */
+.falling{
+    position:absolute;
+    width:10px;
+    height:10px;
+    background:radial-gradient(circle,#ffe6ec,#ff1e56);
+    border-radius:50%;
+    animation:fall linear forwards;
+    opacity:0.8;
+}
+@keyframes fall{
+    0%{transform:translateY(-20px) rotate(0deg);}
+    100%{transform:translateY(100vh) rotate(360deg); opacity:0;}
+}
+
+/* Click hearts */
+.heart{
+    position:absolute;
+    font-size:15px;
+    animation:floatUp 4s linear forwards;
+}
+@keyframes floatUp{
+    0%{transform:translateY(0); opacity:1;}
+    100%{transform:translateY(-150px); opacity:0;}
+}
+</style>
+</head>
+<body>
+
+<div class="message">
+    <h1>Happy Valentine's Day 💖</h1>
+    <p>
+    For My Beautiful Girlfriend 💕<br><br>
+    "Ang mahal ko ay nangusap at ganito ang sinabi: Sa akin ay sumama ka, halika na, aking mahal."  
+    <br><b>Awit 2:10</b><br><br>
+    "Kay ganda mo, aking sinta; kay ganda mo, aking mahal. Wala akong maipintas sa taglay mong kagandahan."  
+    <br><b>Awit 4:7</b>
+    </p>
+</div>
+
+<div class="flowers-container" id="flowers-container"></div>
+
+<script>
+// Flower types & colors
+const container = document.getElementById("flowers-container");
+const flowerTypes = ["flower-small","flower-medium","flower-large"];
+const colors = [
+    "radial-gradient(circle,#ffe6ec,#ff1e56 70%)",
+    "radial-gradient(circle,#ffe6ec,#ff6f91 70%)",
+    "radial-gradient(circle,#fff0b3,#ffe066 70%)",
+    "radial-gradient(circle,#ffe6ec,#ff9a8d 70%)"
+];
+
+// Generate 12 flowers
+for(let i=0;i<12;i++){
+    const flower = document.createElement("div");
+    const type = flowerTypes[Math.floor(Math.random()*flowerTypes.length)];
+    flower.classList.add("flower",type);
+
+    const color = colors[Math.floor(Math.random()*colors.length)];
+
+    flower.innerHTML = `
+        <div class="stem"></div>
+        <div class="leaf left"></div>
+        <div class="leaf right"></div>
+        <div class="petal" style="transform:rotate(0deg) translateY(-10px); background:${color};"></div>
+        <div class="petal" style="transform:rotate(45deg) translateY(-10px); background:${color};"></div>
+        <div class="petal" style="transform:rotate(90deg) translateY(-10px); background:${color};"></div>
+        <div class="petal" style="transform:rotate(135deg) translateY(-10px); background:${color};"></div>
+        <div class="petal" style="transform:rotate(180deg) translateY(-10px); background:${color};"></div>
+        <div class="petal" style="transform:rotate(225deg) translateY(-10px); background:${color};"></div>
+        <div class="petal" style="transform:rotate(270deg) translateY(-10px); background:${color};"></div>
+        <div class="petal" style="transform:rotate(315deg) translateY(-10px); background:${color};"></div>
+    `;
+    container.appendChild(flower);
+}
+
+// Falling petals
+function createPetal(){
+    const petal=document.createElement("div");
+    petal.classList.add("falling");
+    petal.style.left=Math.random()*window.innerWidth+"px";
+    petal.style.animationDuration=(3+Math.random()*2)+"s";
+    document.body.appendChild(petal);
+    setTimeout(()=>petal.remove(),6000);
+}
+setInterval(createPetal,400);
+
+// Click hearts
+document.addEventListener("click",function(e){
+    const heart=document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="💖";
+    heart.style.left=e.clientX+"px";
+    heart.style.top=e.clientY+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),4000);
+});
+</script>
+
+</body>
+</html>
