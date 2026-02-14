@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to top right, #ff9a9e, #fad0c4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+        color: white;
+    }
+
+    .container {
+        z-index: 2;
+    }
+
+    h1 {
+        font-size: 45px;
+        animation: glow 2s infinite alternate;
+    }
+
+    p {
+        font-size: 20px;
+        margin-top: 10px;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 30px;
+        font-size: 16px;
+        background: white;
+        color: #ff4b5c;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #ff4b5c;
+        color: white;
+    }
+
+    @keyframes glow {
+        from { text-shadow: 0 0 10px white; }
+        to { text-shadow: 0 0 25px red; }
+    }
+
+    /* Flowers */
+    .flower {
+        position: absolute;
+        top: -50px;
+        font-size: 30px;
+        animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh) rotate(360deg);
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Happy Valentine's Day 💕</h1>
+    <p>To my beautiful girlfriend, you are my forever flower 🌹</p>
+    <button onclick="showLove()">Click Me 💖</button>
+</div>
+
+<script>
+    function createFlower() {
+        const flower = document.createElement("div");
+        flower.classList.add("flower");
+        flower.innerHTML = "🌸";
+
+        flower.style.left = Math.random() * 100 + "vw";
+        flower.style.animationDuration = (3 + Math.random() * 5) + "s";
+        flower.style.fontSize = (20 + Math.random() * 30) + "px";
+
+        document.body.appendChild(flower);
+
+        setTimeout(() => {
+            flower.remove();
+        }, 8000);
+    }
+
+    setInterval(createFlower, 300);
+
+    function showLove() {
+        alert("I love you so much! ❤️🌹");
+    }
+</script>
+
+</body>
+</html>
